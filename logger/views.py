@@ -22,9 +22,7 @@ class ListView(generic.ListView):
         return Read.objects.order_by("-date")
 
 def index(request):
-    latest_read_list = Read.objects.order_by('-date')[:5]
     context = {
-        'latest_read_list': latest_read_list,
         'mediums': Read.MEDIUM_CHOICES,
     }
     return render(request, "logger/index.html", context)
@@ -44,4 +42,4 @@ def log(request):
     book.save()
     read = Read(book=book, date=date, medium=medium)
     read.save()
-    return HttpResponseRedirect(reverse("logger:index"))
+    return HttpResponseRedirect(reverse("logger:list"))

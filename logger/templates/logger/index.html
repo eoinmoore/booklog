@@ -1,13 +1,3 @@
-{% if latest_read_list %}
-   <ul>
-   {% for read in latest_read_list %}
-      <li><a href="{% url 'logger:detail' read.id %}">{{ read }}</a></li>
-   {% endfor %}
-   </ul>
-{% else %}
-   <p>No reads are available.</p>
-{% endif %}
-
 <form action="{% url 'logger:log' %}" method=post>
    {% csrf_token %}
    <h2>Input a new book</h2>
