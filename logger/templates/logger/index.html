@@ -1,0 +1,25 @@
+{% if latest_read_list %}
+   <ul>
+   {% for read in latest_read_list %}
+      <li><a href="{% url 'logger:detail' read.id %}">{{ read }}</a></li>
+   {% endfor %}
+   </ul>
+{% else %}
+   <p>No reads are available.</p>
+{% endif %}
+
+<form action="{% url 'logger:log' %}" method=post>
+   {% csrf_token %}
+   <h2>Input a new book</h2>
+   <input name="title" type="text" placeholder="title" /><br>
+   <input name="author" type="text" placeholder="author" /><br>
+   <input name="date" type="date" /><br>
+
+   <label for="medium">Medium:</label>
+   <select name="medium" id="medium">
+   {% for id, medium in mediums %}
+      <option value="{{ id }}">{{ medium }}</option>
+   {% endfor %}
+   </select><br>
+   <input type="submit">
+</form>
